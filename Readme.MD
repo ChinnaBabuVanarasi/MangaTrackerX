@@ -1,7 +1,6 @@
 # MangaTrackerX
 ----
-## App to extract and track latest chapters of listed Manga links and redirect to their source website
-## Your manga universe at your fingertips. Track and link your favorite manga chapters effortlessly.
+## App to extract and track latest chapters of listed Manga links and redirect to their source website.
 
 ## MongoDB Collections
 ----
