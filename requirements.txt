@@ -1,0 +1,8 @@
+beautifulsoup4
+Flask
+pandas
+Pillow
+pymongo
+requests
+selenium
+gunicorn
