@@ -1,0 +1,104 @@
+.main-container {
+    max-width: 40em;
+    margin: 0 auto;
+}
+
+.manga-item {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(246, 235, 235, 0.5);
+    padding: 30px 20px;
+    margin-top: 2rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+
+}
+
+.p-image {
+    border-radius: 10px;
+    margin-left: 10px;
+    object-fit: cover;
+}
+
+.manga-info {
+    margin-left: 50px;
+    margin-top: -70px;
+}
+
+.manga-info h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #444444;
+    text-decoration:none;
+    text-shadow: 0 4px 4px rgb(255 24 24 / 50%);
+}
+.manga-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgb(255 24 24 / 50%);
+    padding: 10px 10px;
+    font-size: larger;
+}
+
+.manga-list a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #3b3b3b;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.manga-list a.chapter-link:visited {
+    background-color: #0267c5;
+    color: blue;
+  }
+.manga-list a.chapter-link:hover {
+    color: #f42f2f;
+  }
+
+
+@media screen and (max-width: 600px) {
+    .manga-item {
+
+        flex-direction: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 4px rgba(246, 235, 235, 0.5);
+        /* text-align: left; */
+      padding:15px 15px;
+    }
+
+    .main-container{
+        max-width: 25em;
+        margin: 15px 10px;
+    }
+
+    .p-image {
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+        margin-left: 5px;
+        /* max-width: 100%; */
+        object-fit: cover;
+       }
+    .manga-info {
+        margin-left: 10px;
+        margin-top: -60px;
+    }
+
+    .manga-info h1 {
+        font-size: 25px;
+        font-weight: bold;
+        color: #444444;
+        text-decoration: none;
+        text-shadow: 0 4px 4px rgb(255 24 24 / 50%);
+        text-align: left;
+    }
+
+}
