@@ -1,0 +1,8 @@
+pymongo
+pandas
+selenium
+requests
+flask
+beautifulsoup4
+python-dotenv
+colorama
