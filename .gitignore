@@ -138,6 +138,10 @@ pyvenv/
 # mkdocs documentation
 /site
 waste.py
+csv_files/
+
+
+
 .idea/
 # mypy
 .mypy_cache/
