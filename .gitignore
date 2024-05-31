@@ -137,6 +137,7 @@ pyvenv/
 
 # mkdocs documentation
 /site
+waste.py
 
 # mypy
 .mypy_cache/

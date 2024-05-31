@@ -6,3 +6,4 @@ flask
 beautifulsoup4
 python-dotenv
 colorama
+validators
