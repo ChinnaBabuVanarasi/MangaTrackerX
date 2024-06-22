@@ -1,12 +1,11 @@
-import os
-from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
 from colorama import Fore
-from src.utilities.common_functions import setup_logging
+from src.utilities.logger_setup import setup_logging
 
 from src.utilities.database_connection import get_collection
+from src.utilities.page_source import get_date_added
 
 
 def get_links_from_csv(filepath):
@@ -14,14 +13,16 @@ def get_links_from_csv(filepath):
     return pd.read_csv(filepath)["links"].tolist()  # Direct conversion to list
 
 
+def get_links_from_db(collection):
+    links = collection.find_one()
+    return links
+
+
 def insert_links_to_csv(links_list, collection):
     """Inserts links, handles duplicates, and logs operations."""
     logger = setup_logging(filename="manga_csv_links_insert")
 
-    current_datetime = datetime.now()
-    date_added = datetime(
-        current_datetime.year, current_datetime.month, current_datetime.day
-    )
+    date_added = get_date_added()
     new_links = []
 
     for link in links_list:
@@ -45,6 +46,7 @@ if __name__ == "__main__":
     # File path handling within the script (no user input needed)
     PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
     csv_file_path = f'{PROJECT_ROOT}/csv_files/manga_links.csv'
-    links = get_links_from_csv(csv_file_path)  # Directly get links
-
-    insert_links_to_csv(links, collection_name)
+    # csv_links = get_links_from_csv(csv_file_path)  # Directly get links
+    db_links = get_links_from_db(collection_name)
+    print(db_links)
+    # insert_links_to_csv(csv_links, collection_name)
