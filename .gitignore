@@ -140,7 +140,7 @@ pyvenv/
 waste.py
 csv_files/
 
-
+.xml*
 
 .idea/
 # mypy
