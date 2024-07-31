@@ -5,7 +5,7 @@ from logging import getLogger, FileHandler, Formatter
 from pathlib import Path
 
 
-def setup_logging(filename, log_level=logging.INFO, default_log_dir="data_ingestion_logs"):
+def setup_logging(filename, log_level=logging.DEBUG, default_log_dir="data_ingestion_logs"):
     """
     Sets up a logger with a dedicated log file and folder based on the provided filename.
 
@@ -32,7 +32,6 @@ def setup_logging(filename, log_level=logging.INFO, default_log_dir="data_ingest
         f"{log_directory}/{filename}",
         f"run_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log",
     )
-    print(log_file_name)
 
     # Create logger directory if it doesn't exist, ignoring potential errors if it already does
     os.makedirs(os.path.dirname(log_file_name), exist_ok=True)
