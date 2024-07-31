@@ -54,29 +54,17 @@ def extract_chapters():
     chapter_collection = get_collection("get_manga_chapters")
     manga_details_collection = get_collection("get_manga_metadata")
 
-    non_urls = ['kunmanga']
-
     for i, record in enumerate(manga_details_collection.find({})):
         url = record["manga_url"]
-        skip_record = False
-
-        for n in non_urls:  # Correctly iterate through non_urls list
-            if n in url:  # Check if any of the strings in non_urls are present in the URL
-                skip_record = True
-                print(f"Skipping: {url} (contains '{n}')")
-                break  # Exit the inner loop if a match is found
-
-        if skip_record:
-            continue  # Skip to the next record in manga_details_collection
-
-        print(Fore.GREEN, f"{i}: Processing: {url}")
+        print(Fore.RED, f"{i}: Processing: {url}")
         existing_record = chapter_collection.find_one({"manga_url": url})
         current_chapter = float(existing_record["latest_chapters"][0]["chapter_num"]) if existing_record else 0
         new_chapters = get_chapters(url, current_chapter, record["manga_title"])
         insert_chapters_data(new_chapters=new_chapters,
                              current_chapter=current_chapter,
                              chapter_collection=chapter_collection, record=record)
-        time.sleep(5)
+        print(Fore.GREEN, f"{i}: Inserted: {url}")
+        time.sleep(1)
 
 
 if __name__ == "__main__":
