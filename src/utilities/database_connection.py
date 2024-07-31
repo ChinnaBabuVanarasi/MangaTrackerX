@@ -7,10 +7,9 @@ from pymongo import MongoClient
 load_dotenv()
 
 COLLECTIONS = {
-    "get_manga_links": "MANGALINKS",
     "get_manga_images": "MANGAIMAGES",
-    "get_manga_chapters": "CHAPTERSDB",
-    "get_manga_details": "MANGADETAILS",
+    "get_manga_chapters": "MANGACHAPTERS",
+    "get_manga_metadata": "MANGAMETATDATA",
     "get_csv_links": "CSVLINKS",
 }
 
@@ -33,7 +32,6 @@ def get_collection(collection_name: str, db=None):
     if db is None:  # Create connection if not provided
         db = get_database_connection()
     collection = os.getenv(COLLECTIONS.get(collection_name))
-    print(collection)
     if collection:
         return db[collection]
     raise ValueError(
