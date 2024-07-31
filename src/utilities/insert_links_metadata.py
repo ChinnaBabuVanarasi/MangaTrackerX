@@ -63,7 +63,6 @@ def get_image(soup, manga_title):
             "en_manga_image": base64.b64encode(image_data).decode("utf-8"),
         }
 
-
 def process_and_insert_manga_data(links_list, collection_name, logger):
     """Processes manga links, extracts details if necessary, and inserts them into the database.
 
@@ -75,50 +74,32 @@ def process_and_insert_manga_data(links_list, collection_name, logger):
     new_entries = []
     for i, item in enumerate(links_list):
         try:
+            # Process based on item type
             if isinstance(item, str):  # Single link from list
                 link = item
                 if not collection_name.find_one({"manga_url": link}):
+                    # Extract details and create data dictionary
                     soup = get_page_source(link)
-                    title = soup.find("div", class_="post-title").find("h1").text.strip()
-                    site = link.split("/")[2]
-                    image_data = get_image(soup, title)
-                    dic = get_summary_content(soup=soup)
-                    manga_rating, manga_genre, manga_type, manga_release, manga_status = (dic['rating'],
-                                                                                          dic['genre(s)'], dic['type'],
-                                                                                          dic['release'], dic['status'])
-                    data = {
-                        "manga_title": title,
-                        "manga_site": site,
-                        "manga_url": link,
-                        "manga_image": image_data["image"],
-                        "en_manga_image": image_data["en_manga_image"],
-                        "manga_rating": manga_rating,
-                        "manga_genre": manga_genre,
-                        "manga_type": manga_type,
-                        "manga_release": manga_release,
-                        "manga_status": manga_status,
-                        "date_added": get_date_added(),
-                    }
+                    data = extract_manga_data(soup, link)
                     new_entries.append(data)
-                    time.sleep(5)
-                    print(Fore.GREEN + f"{i}: Inserted: {link}")
-                    logger.info(f"Inserted: {link}")
+                    time.sleep(5)  # Adjust sleep time as needed
 
             elif isinstance(item, dict):  # Dictionary with 'manga_url' and possibly 'Date_added'
                 link = item["manga_url"]
                 if not collection_name.find_one({"manga_url": link}):
-                    new_entries.append(
-                        dict(manga_url=link, date_added=get_date_added())
-                    )
-                    print(Fore.GREEN + f"{i}: Inserted: {link}")
-                    logger.info(f"Inserted: {link}")
+                    # Create basic entry with 'manga_url' and 'date_added'
+                    new_entries.append(dict(manga_url=link, date_added=get_date_added()))
+
             else:
                 raise ValueError(Fore.RED + f"Invalid item type: {type(item)}")
-    #
+
+            print(Fore.GREEN + f"{i}: Inserted: {link}")
+            logger.info(f"Inserted: {link}")
+
         except (KeyError, ValueError) as e:
-            logger.critical(f"Error processing item: {item} - {e}")
-        except PyMongoError as e:  # Catch specific MongoDB errors
-            logger.critical(f"MongoDB error inserting: {item} - {e}")
+            logger.error(f"Error processing item {i}: {item} - {e}")  # Use error level for non-critical issues
+        except PyMongoError as e:
+            logger.critical(f"MongoDB error inserting: {item} - {e}")  # Use critical level for serious errors
 
     if new_entries:
         try:
@@ -127,3 +108,28 @@ def process_and_insert_manga_data(links_list, collection_name, logger):
             logger.critical(f"MongoDB error during bulk insert: {e}")
     else:
         print(Fore.GREEN, "All links/entries already exist in the database.")
+
+
+# Define a separate function for extracting manga details (assuming you have functions like get_page_source, get_image, etc.)
+def extract_manga_data(soup, link):
+    title = soup.find("div", class_="post-title").find("h1").text.strip()
+    site = link.split("/")[2]
+    image_data = get_image(soup, title)
+    dic = get_summary_content(soup=soup)
+    manga_rating, manga_genre, manga_type, manga_release, manga_status = (dic['rating'],
+                                                                          dic['genre(s)'], dic['type'],
+                                                                          dic['release'], dic['status'])
+    data = {
+        "manga_title": title,
+        "manga_site": site,
+        "manga_url": link,
+        "manga_image": image_data["image"],
+        "en_manga_image": image_data["en_manga_image"],
+        "manga_rating": manga_rating,
+        "manga_genre": manga_genre,
+        "manga_type": manga_type,
+        "manga_release": manga_release,
+        "manga_status": manga_status,
+        "date_added": get_date_added(),
+    }
+    return data
