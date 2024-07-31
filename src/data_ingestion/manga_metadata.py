@@ -17,4 +17,3 @@ def insert_links_to_db(manga_links=None):
 if __name__ == "__main__":
     links = get_links(filepath=None, use_db=True)
     insert_links_to_db(links)
-    # insert_links_to_db()
