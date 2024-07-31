@@ -21,4 +21,4 @@ def insert_chapters_data(new_chapters, current_chapter, chapter_collection, reco
                 "manga_status": record["manga_status"],
                 "latest_chapters": new_chapters[:2]
             })
-            print(f"inserted: ", new_chapters[:2])
+
