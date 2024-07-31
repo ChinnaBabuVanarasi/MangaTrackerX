@@ -1,11 +1,15 @@
+import time
 from datetime import datetime
 
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
 def get_page_source(manga_url):
+    time.sleep(5)
+    # print(manga_url)
     options = Options()
     options.add_argument("--headless")
     options.add_argument(
