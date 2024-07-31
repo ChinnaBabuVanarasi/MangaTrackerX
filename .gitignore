@@ -32,7 +32,7 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logs
+# Installer data_ingestion_logs
 pip-log.txt
 pip-delete-this-directory.txt
 
