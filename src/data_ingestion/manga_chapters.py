@@ -57,14 +57,16 @@ def extract_chapters():
 
     for i, record in enumerate(manga_details_collection.find({})):
         url = record["manga_url"]
-        print(Fore.RED, f"{i}: Processing: {url}")
         existing_record = chapter_collection.find_one({"manga_url": url})
         current_chapter = float(existing_record["latest_chapters"][0]["chapter_num"]) if existing_record else 0
         new_chapters = get_chapters(url, current_chapter, record["manga_title"])
-        insert_chapters_data(new_chapters=new_chapters,
-                             current_chapter=current_chapter,
-                             chapter_collection=chapter_collection, record=record)
-        print(Fore.GREEN, f"{i}: Inserted: {url}")
+        if new_chapters:
+            insert_chapters_data(new_chapters=new_chapters,
+                                 current_chapter=current_chapter,
+                                 chapter_collection=chapter_collection, record=record)
+            print(Fore.GREEN, f"{i}: Inserted: {url}")
+        else:
+            print(Fore.RED, f"{i}: No new Chapters for: {url}")
         time.sleep(1)
 
 
