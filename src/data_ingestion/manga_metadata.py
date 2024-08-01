@@ -1,5 +1,3 @@
-import logging
-
 from src.utilities.database_connection import get_collection
 from src.utilities.insert_links_metadata import process_and_insert_manga_data
 from src.utilities.read_manga_links_csv_db import get_links
