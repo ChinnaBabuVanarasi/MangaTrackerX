@@ -3,9 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+testing_source.py
+waste.py
+src/utilities/mongodb_crud.py
+
 *.iml
 *.xml
-waste.py
 # C extensions
 *.so
 
