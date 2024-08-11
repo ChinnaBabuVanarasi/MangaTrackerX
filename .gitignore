@@ -5,7 +5,6 @@ data_ingestion_logs/
 # util python scripts
 testing_source.py
 waste.py
-src/utilities/mongodb_crud.py
 
 
 
