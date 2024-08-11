@@ -2,7 +2,9 @@ pymongo
 pandas
 selenium
 requests
-flask
+Flask
 beautifulsoup4
 python-dotenv
 colorama
+fastapi
+uvicorn
