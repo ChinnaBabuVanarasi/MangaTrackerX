@@ -4,23 +4,38 @@
 
 ## MongoDB Collections
 ----
-### MangaLinks Keys
-- Manga_url
-- Title
-- Site
+### csv_links
+- manga_url
 - Date_added
 
-## MangaDetails Keys
-- Manga_url
-- Title
-- Binary_Image
-- Image
-- Date_added
+## manga_metadata
+- manga_title
+- manga_site
+- manga_url
+- manga_image
+- en_manga_image
+- manga_rating
+- manga_genre
+- manga_type
+- manga_release
+- manga_status
+- date_added
 
-## MangaChapters Keys
-- Manga_url
-- Title
-- Binary_Image
-- Image
-- Latest_chapters[{Chapter_name, Chapter_url}]
-- Date_added
+## manga_chapters
+- manga_title
+- manga_site
+- manga_url
+- manga_image
+- en_manga_image
+- manga_rating
+- manga_genre
+- manga_type
+- manga_release
+- manga_status
+- latest_chapters[
+    {
+      chapter_num
+      chapter_url
+      chapter_added
+    }
+  ]
