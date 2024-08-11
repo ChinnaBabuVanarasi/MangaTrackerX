@@ -34,8 +34,8 @@
 - manga_status
 - latest_chapters[
     {
-      chapter_num
-      chapter_url
-      chapter_added
+      chapter_num,
+      chapter_url,
+      chapter_added,
     }
   ]
