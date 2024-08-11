@@ -6,5 +6,6 @@ Flask
 beautifulsoup4
 python-dotenv
 colorama
+validators
 fastapi
 uvicorn
