@@ -4,7 +4,8 @@ from src.utilities.database_connection import get_collection
 
 def get_records(search_key=None, endpoint=None):
     collection = get_collection('get_manga_chapters')
-    projection = {"_id": False, "en_manga_image": False}
+    projection = {"_id": False}
+
     if endpoint == 'all_links':
         return [record['Manga_url'] for record in list(collection.find({}))]
 
