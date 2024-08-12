@@ -1,6 +1,3 @@
-from urllib.parse import unquote
-
-from fastapi import FastAPI
 from fastapi import FastAPI
 
 from src.utilities.mongodb_crud_api import get_records
