@@ -1,31 +1,8 @@
-from fastapi import FastAPI, Body
-
-from src.utilities.mongodb_crud_api import get_records
+from fastapi import FastAPI
 
 app = FastAPI()
 
 
-@app.get('/api/links')
+@app.get('/')
 async def get_all_links():
-    records = get_records(endpoint='all_links')
-    links = [record['manga_url'] for record in records]
-    return links
-
-
-@app.get('/api/chapters')
-async def get_all_metadata():
-    records = get_records(endpoint='chapters')
-    return records
-
-
-@app.get('/api/chapter')
-async def get_metadata_one(query: str):
-    records = get_records(search_key=query, endpoint='chapter')
-    return records
-
-
-@app.post("/api/insert")
-async def insert_data_to_db(payload: list[dict] = Body()):
-    collection = get_records('get_csv_links')
-    for data in payload:
-        pass
+    return "Hey there! Welcome to MangatrackerX"
