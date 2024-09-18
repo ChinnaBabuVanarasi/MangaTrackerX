@@ -27,15 +27,12 @@ async def get_metadata_one(query: str):
 
 @app.post("/api/insert_link")
 async def insert_data_to_db(links: PostLinks = Body()):
-    collection = 'get_csv_links'
     validated_data = links.dict()
-    result = insert_records(collection_name=collection, links=validated_data["links"])
+    result = insert_records(collection_tag=validated_data['tags'], links=validated_data["links"])
     return result
 
 @app.delete("/api/delete_record")
 async def delete_records_db(links: PostLinks = Body()):
     validated_data = links.dict()
-    collection_tag = validated_data['tags']
-    payload = validated_data["links"]
-    result = delete_records(collection_tag=collection_tag, payload=payload)
+    result = delete_records(collection_tag=validated_data['tags'], payload=validated_data["links"])
     return result
