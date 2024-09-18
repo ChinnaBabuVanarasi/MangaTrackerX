@@ -1,11 +1,11 @@
-pymongo~=4.7.2
+pymongo
 pandas
 selenium
 requests
 Flask
 beautifulsoup4
-python-dotenv~=1.0.1
+python-dotenv
 colorama
-fastapi~=0.112.0
+fastapi
 uvicorn
-pydantic~=2.8.2
+pydantic
