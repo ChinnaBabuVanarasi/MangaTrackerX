@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field, constr, field_validator
 
 class PostLinks(BaseModel):
     links: list[str] = Field(min_length=1)
-    tags: Optional[str] = Field(min_length=1)
+    tags: str = Field(min_length=1)
 
 
 class PostMetaData(BaseModel):
