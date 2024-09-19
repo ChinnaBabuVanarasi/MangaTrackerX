@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+from fastapi import HTTPException
+
 from src.utilities.database_connection import get_collection
 
 
@@ -19,10 +21,7 @@ def get_records(search_key=None, endpoint=None):
     elif endpoint == 'chapter':
         query = {"$or": [{"manga_title": search_key}, {"manga_url": search_key}]}
         record = collection.find_one(query, projection)
-        if record:
-            return record
-        else:
-            return {"message": "Manga not found"}
+        return record
 
 
 def get_date_added():
@@ -55,9 +54,9 @@ def insert_records(collection_tag=None, links=None):
             date_added = get_date_added()
             data = {"manga_url": query.rstrip('/'), "date_added": date_added}
             collection.insert_one(data)
-            response.append({"message": f"Successfully Inserted url - {query}"})
+            response.append({"status": 200, "message": f"Successfully Inserted url - {query}"})
         else:
-            response.append({"message": "manga url already exists in csv_links Collections"})
+            response.append({"status": 200,  "message": "manga url already exists in csv_links Collections"})
     return response
 
 
