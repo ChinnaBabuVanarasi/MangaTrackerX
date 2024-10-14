@@ -37,7 +37,7 @@ async def get_metadata_one(query: str):
 
 
 
-@app.post("/api/insert_link", status_code=status.HTTP_201_OK)
+@app.post("/api/insert_link", status_code=status.HTTP_201_CREATED)
 async def insert_data_to_db(links: PostLinks = Body()):
     try:
         validated_data = links.dict()
